@@ -9,11 +9,7 @@ public class Boid : MonoBehaviour {
     Vector3 size;
 
     void Start() {
-        this.velocity = new Vector3(Random.Range(-0.01f, 0.01f), Random.Range(-0.01f, 0.01f), 0);
-    }
-
-    void Update() {
-        this.transform.position += velocity;
+        this.velocity = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
     }
 
     List<Vector2> ClosestWallPoints() {
