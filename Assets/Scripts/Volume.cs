@@ -55,7 +55,7 @@ public class Volume : MonoBehaviour {
         this.boids = PopulateWithBoids();
         this.directions = DefineDirections(numDirections);
 
-        this.GetComponent<BoxCollider>().size = new Vector3(x / 10f, 1, y / 10f);
+        this.GetComponent<BoxCollider>().size = new Vector3(10f, 1, 10f);
     }
 
     void FixedUpdate() {
@@ -280,27 +280,27 @@ public class Volume : MonoBehaviour {
             float distance = (hit.point - boid.transform.position).magnitude;
 
             if (distance <= collisionViewDst) {
-                if (hit.point.x >= 50f || hit.point.x <= -50f) {
+                if (hit.point.x >= (x * 0.5f) || hit.point.x <= -(x * 0.5f)) {
                     // Debug.Log("Hit point:");
                     // Debug.Log(hit.point);
-                    if (hit.point.y >=  0.5f * 50f) {
-                        avoidanceVector = new Vector3((hit.point.x / -50f) * 1f, -1f, 0) * (1f / distance);
+                    if (hit.point.y >=  0.5f * (y * 0.5f)) {
+                        avoidanceVector = new Vector3((hit.point.x / -(x * 0.5f)) * 1f, -1f, 0) * (1f / distance);
                     }
-                    else if (hit.point.y <=  0.5f * -50f) {
-                        avoidanceVector = new Vector3((hit.point.x / -50f) * 1f, 1f, 0) * (1f / distance);
+                    else if (hit.point.y <=  0.5f * -(y * 0.5f)) {
+                        avoidanceVector = new Vector3((hit.point.x / -(x * 0.5f)) * 1f, 1f, 0) * (1f / distance);
                     }
                     else {
                         avoidanceVector = Vector3.Reflect(boid.GetComponent<Boid>().velocity, hit.normal).normalized * (1f / distance) * collisionAvoidanceStrength;
                     }
                 } 
-                if (hit.point.y >= 50f || hit.point.y <= -50f) {
+                if (hit.point.y >= (y * 0.5f) || hit.point.y <= -(y * 0.5f)) {
                     // Debug.Log("Hit point");
                     // Debug.Log(hit.point);
-                    if (hit.point.x >=  0.5f * 50f) {
-                        avoidanceVector = new Vector3(-1f, (hit.point.y / -50f) * 1f, 0) * (1f / distance);
+                    if (hit.point.x >=  0.5f * (x * 0.5f)) {
+                        avoidanceVector = new Vector3(-1f, (hit.point.y / -(y * 0.5f)) * 1f, 0) * (1f / distance);
                     }
-                    else if (hit.point.x <=  0.5f * -50f) {
-                        avoidanceVector = new Vector3(1f, (hit.point.y / -50f) * 1f, 0) * (1f / distance);
+                    else if (hit.point.x <=  0.5f * -(x * 0.5f)) {
+                        avoidanceVector = new Vector3(1f, (hit.point.y / -(y * 0.5f)) * 1f, 0) * (1f / distance);
                     }
                     else {
                         avoidanceVector = Vector3.Reflect(boid.GetComponent<Boid>().velocity, hit.normal).normalized * (1f / distance) * collisionAvoidanceStrength;

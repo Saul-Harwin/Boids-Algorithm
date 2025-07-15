@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c0cb4df09c84544b89fc3f545c883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 100
+  x: 121
   y: 100
   z: 1
   walls:
@@ -517,7 +517,7 @@ MonoBehaviour:
   velocityMatchStregnth: 0.003
   velocityMatchDistance: 20
   maxVelocity: 0.15
-  maxSteeringVector: 0.1
+  maxSteeringVector: 0.05
   randomness: 0.001
   collisionViewDst: 50
   collisionAvoidanceStrength: 20
