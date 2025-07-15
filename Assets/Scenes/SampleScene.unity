@@ -458,15 +458,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c0cb4df09c84544b89fc3f545c883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 121
-  y: 100
+  x: 500
+  y: 500
   z: 1
   walls:
   - {x: 100, y: 0, z: -50, w: 50}
   - {x: -100, y: 0, z: 50, w: -50}
   - {x: 0, y: 100, z: -50, w: -50}
   - {x: 0, y: -100, z: 50, w: 50}
-  numBoids: 40
+  numBoids: 80
   boidPrefab: {fileID: 127534266500331461, guid: abce67e09973a4ad68e4ae9b48366fc3, type: 3}
   boids:
   - {fileID: 0}
@@ -510,20 +510,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   drawRays: 0
-  flockingStrength: 0.0015
-  flockingDistance: 20
-  avoidingStrength: 0.001
-  avoidingDistance: 3
-  velocityMatchStregnth: 0.003
-  velocityMatchDistance: 20
-  maxVelocity: 0.15
-  maxSteeringVector: 0.05
-  randomness: 0.001
-  collisionViewDst: 50
-  collisionAvoidanceStrength: 20
+  drawResultants: 0
+  flockingStrength: 0.0022
+  flockingDistance: 60
+  avoidingStrength: 0.01
+  avoidingDistance: 6
+  velocityMatchStregnth: 0.0085
+  velocityMatchDistance: 50
+  maxVelocity: 0.26
+  maxSteeringVector: 0.06
+  randomness: 0.0015
+  collisionViewDst: 300
+  collisionAvoidanceStrength: 100
   environmentTag: Environment
   directions: []
-  numDirections: 21
+  numDirections: 0
 --- !u!23 &1046682382
 MeshRenderer:
   m_ObjectHideFlags: 0

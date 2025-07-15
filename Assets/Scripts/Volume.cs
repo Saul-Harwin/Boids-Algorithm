@@ -27,6 +27,7 @@ public class Volume : MonoBehaviour {
 
     // Bool turn on and off rays
     public bool drawRays; 
+    public bool drawResultants;
 
     // Strength of how much effect each rule has on the boids
     public float flockingStrength           = 0.0005f;
@@ -83,8 +84,9 @@ public class Volume : MonoBehaviour {
             Vector3 finalVector = flockingVector + avoidanceVector + matchVelocity + randomMotion + collisionAvoision;
 
             // Draw rays if the drawRays checked
-            if (drawRays) {
+            if (drawResultants) {
                 Debug.DrawRay(boid.transform.position, finalVector, Color.red);
+                Debug.DrawRay(boid.transform.position, boid.GetComponent<Boid>().velocity * 10, Color.blue);
             }
             
 
@@ -108,6 +110,7 @@ public class Volume : MonoBehaviour {
             boid.transform.position = new Vector3(boid.transform.position.x, boid.transform.position.y, 0f);
 
             LimitSpeed(boid);
+            KeepWithinWall(boid);
         }
     }
 
@@ -129,18 +132,32 @@ public class Volume : MonoBehaviour {
     }
 
     void KeepWithinWall(GameObject boid) {
-        if (boid.transform.position.x <= -x / 2f || boid.transform.position.x >= x / 2f) {
-            boid.transform.position = new Vector3(boid.transform.position.x * -1, boid.transform.position.y, boid.transform.position.z);
+        // if (boid.transform.position.x <= -x / 2f || boid.transform.position.x >= x / 2f) {
+        //     boid.transform.position = new Vector3(boid.transform.position.x * -1, boid.transform.position.y, boid.transform.position.z);
+        // };
+        // if (boid.transform.position.y <= -y / 2f || boid.transform.position.y >= y / 2f) {
+        //     boid.transform.position = new Vector3(boid.transform.position.x, boid.transform.position.y * -1, boid.transform.position.z);
+        // };
+        if (boid.transform.position.x <= -x / 2f) {
+            boid.transform.position = new Vector3(-x / 2f + 0.1f, boid.transform.position.y, boid.transform.position.z);
         };
-        if (boid.transform.position.y <= -y / 2f || boid.transform.position.y >= y / 2f) {
-            boid.transform.position = new Vector3(boid.transform.position.x, boid.transform.position.y * -1, boid.transform.position.z);
+        if (boid.transform.position.x >= x / 2f) {
+            boid.transform.position = new Vector3(x / 2f - 0.1f, boid.transform.position.y, boid.transform.position.z);
+        };
+
+
+        if (boid.transform.position.y <= -y / 2f) {
+            boid.transform.position = new Vector3(boid.transform.position.x, -y / 2f + 0.1f, boid.transform.position.z);
+        };
+        if (boid.transform.position.y >= y / 2f) {
+            boid.transform.position = new Vector3(boid.transform.position.x, y / 2f - 0.1f, boid.transform.position.z);
         };
     }
 
     List<GameObject> PopulateWithBoids() {
         List<GameObject> boids = new List<GameObject>();
         for (int i = 0; i < numBoids; i++) {
-            Vector3 position = new Vector3(Random.Range(-x / 2f, x / 2f), Random.Range(-y / 2f, y / 2f), 0);
+            Vector3 position = new Vector3(Random.Range(-x / 2f * 0.8f, x / 2f * 0.8f), Random.Range(-y / 2f * 0.8f, y / 2f * 0.8f), 0);
             boids.Add(Instantiate(boidPrefab, position, Quaternion.identity));
         }
         return boids;
