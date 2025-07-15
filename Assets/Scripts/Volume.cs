@@ -57,6 +57,8 @@ public class Volume : MonoBehaviour {
         this.directions = DefineDirections(numDirections);
 
         this.GetComponent<BoxCollider>().size = new Vector3(10f, 1, 10f);
+
+        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize = x / 2f + 10f;
     }
 
     void FixedUpdate() {
